@@ -1,18 +1,10 @@
 stage 'CI'
-<<<<<<< HEAD
-
-=======
->>>>>>> 57f1ed0b1a1f44509550a822835f700d35892260
 node {
 
     checkout scm
 
     //git branch: 'jenkins2-course', 
-<<<<<<< HEAD
-    //    url: 'https://github.com/chrispetsos/solitaire-systemjs-course.git'
-=======
     //    url: 'https://github.com/g0t4/solitaire-systemjs-course'
->>>>>>> 57f1ed0b1a1f44509550a822835f700d35892260
 
     // pull dependencies from npm
     // on windows use: bat 'npm install'
@@ -35,23 +27,8 @@ node {
           
 }
 
-<<<<<<< HEAD
-node('ubuntu') {
-    sh 'ls'
-    sh 'rm -rf *'
-    unstash 'everything'
-    sh 'ls'
-}
-
-// parallel integration testing
-stage 'Browser Testing'
-parallel chrome: {
-    runTests("PhantomJS")
-}, firefox: {
-    runTests("PhantomJS")
-=======
 // demoing a second agent
-node('mac') {
+node('ubuntu') {
     // on windows use: bat 'dir'
     sh 'ls'
 
@@ -67,12 +44,9 @@ node('mac') {
 //parallel integration testing
 stage 'Browser Testing'
 parallel chrome: {
-    runTests("Chrome")
+    runTests("PhantomJS")
 }, firefox: {
-    runTests("Firefox")
-}, safari: {
-    runTests("Safari")
->>>>>>> 57f1ed0b1a1f44509550a822835f700d35892260
+    runTests("PhantomJS")
 }
 
 def runTests(browser) {
@@ -100,10 +74,6 @@ input 'Deploy to staging?'
 // and if multiple pipelines are executing, 
 // newest is only that will be allowed through, rest will be canceled
 stage name: 'Deploy to staging', concurrency: 1
-<<<<<<< HEAD
-
-=======
->>>>>>> 57f1ed0b1a1f44509550a822835f700d35892260
 node {
     // write build number to index page so we can see this update
     // on windows use: bat "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
@@ -116,8 +86,6 @@ node {
     notify 'Solitaire Deployed!'
 }
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -128,7 +96,6 @@ node {
 
 
 
->>>>>>> 57f1ed0b1a1f44509550a822835f700d35892260
 def notify(status){
     emailext (
       to: "wesmdemos@gmail.com",
